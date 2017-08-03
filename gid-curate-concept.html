@@ -16,10 +16,10 @@ patterns= '[{"id": "100152","verified": "Y"},{"id": "100151","verified": "Y"}]'
 related-concepts = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
 example-values = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
 example-columns = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
-entity = "CURATE-CONCEPT" curateconcept='{{curateconcept}}'>
+curateconcept='{{curateconcept}}'>
 </gid-curate-concept>
  
-The fields 'concept' , 'user' and 'entity' are  mandatory.
+The fields 'concept' and 'user' are  mandatory.
 
 If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
 
@@ -84,7 +84,8 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
      	       concept:{
      	    	  type: String,
 	   	          value : '',
-	   	          notify :  true
+	   	          notify :  true,
+	   	          observer: 'conceptModified'
      	       },
      	      synonyms: {
 	           	   type: Array,
@@ -124,8 +125,7 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
      	       entity: {
                    type: String,
                    notify: true,
-                   value: '',
-                   observer: 'entityModified'
+                   value: ''
                },
                path: {
                	   type: String,
@@ -148,14 +148,14 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
 	          }
          	
          },
-         entityModified: function () {
-        	 if (this.entity) {
+         conceptModified: function () {
+        	 if (this.concept) {
         	 	if (!this.apiUrl) {
 	      			//this.curateConceptUrl = this.importPath + 'assets/json/' + this.entity.toLowerCase() + '.json';
 	                //this.curateConceptTimeout =  this.curateConceptTimeout - 1;
       			}
         		else {
-         			this.apiEntity = this.entity;
+         			this.apiEntity = 'CURATE-CONCEPT';
          		}
          	}
 				

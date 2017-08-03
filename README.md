@@ -2,9 +2,10 @@
 
 A data component to curate concept
 
-    <gid-curate-concept concept='1' user='1' entity = "CURATE-CONCEPT" 	curateconcept='{{curateconcept}}'></<gid-curate-concept>
+    <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
+    </<gid-curate-concept>
     
-The properties 'concept', 'user' and 'entity' are mandatory.
+The properties 'concept' and 'user' are mandatory.
 
 API endpoint:
 
