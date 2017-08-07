@@ -36,10 +36,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         related-concepts = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
         example-values = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
         example-columns = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
-        curateconcept='{{curateconcept}}'>
+        curate = true
+        response='{{response}}'>
         </gid-curate-concept>
         
-        <template is="dom-repeat" items="[[curateconcept]]">
+        <template is="dom-repeat" items="[[response]]">
             <div class="horizontal-section">
                 <table style="width:100%">
 				  <tr>
