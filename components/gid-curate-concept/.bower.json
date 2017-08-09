@@ -17,11 +17,11 @@
     "gid-api": "makedatabetter-dev/gid-api"
   },
   "homepage": "https://github.com/makedatabetter-dev/gid-curate-concept",
-  "_release": "9d795db0c2",
+  "_release": "b5cde05ed6",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9d795db0c2dfa10c456e620714e24100f1f4cbb6"
+    "commit": "b5cde05ed6be4ced2a5a116a5bc58ff002e1faf1"
   },
   "_source": "https://github.com/makedatabetter-dev/gid-curate-concept.git",
   "_target": "*",

@@ -2,61 +2,61 @@
     "synonyms": [
         {
             "id": "700129",
-            "label": "product_desc",
+            "label": "sample product_desc",
             "verified": "Y",
             "relevance": 20
         },
         {
             "id": "700132",
-            "label": "cust_name",
+            "label": "sample cust_name",
             "verified": "N",
             "relevance": 27
         },
         {
             "id": "700136",
-            "label": "cust_id",
+            "label": "sample cust_id",
             "verified": "N",
             "relevance": 55.00000000000001
         },
         {
             "id": "700125",
-            "label": "user_name",
+            "label": "sample user_name",
             "verified": "N",
             "relevance": 11
         },
         {
             "id": "700131",
-            "label": "f_name",
+            "label": "sample f_name",
             "verified": "N",
             "relevance": 11
         },
         {
             "id": "700128",
-            "label": "product_cd",
+            "label": "sample product_cd",
             "verified": "N",
             "relevance": 40
         },
         {
             "id": "700127",
-            "label": "last_name",
+            "label": "sample last_name",
             "verified": "N",
             "relevance": 20
         },
         {
             "id": "700134",
-            "label": "first_name",
+            "label": "sample first_name",
             "verified": "N",
             "relevance": 22
         },
         {
             "id": "700133",
-            "label": "customer_name",
+            "label": "sample customer_name",
             "verified": "N",
             "relevance": 11
         },
         {
             "id": "700126",
-            "label": "l_name",
+            "label": "sample l_name",
             "verified": "N",
             "relevance": 11
         },
@@ -68,13 +68,13 @@
         },
         {
             "id": "700135",
-            "label": "cust_phone",
+            "label": "sample cust_phone",
             "verified": "N",
             "relevance": 9
         },
         {
             "id": "700130",
-            "label": "cust_fname",
+            "label": "sample cust_fname",
             "verified": "N",
             "relevance": 9
         }
@@ -156,43 +156,43 @@
     "relatedConcepts": [
         {
             "id": "100376",
-            "label": "Email-Address",
+            "label": "sample Email-Address",
             "verified": "N",
             "relevance": 18
         },
         {
             "id": "100358",
-            "label": "Birth-Date",
+            "label": "sample Birth-Date",
             "verified": "N",
             "relevance": 16
         },
         {
             "id": "100352",
-            "label": "Address",
+            "label": "sample Address",
             "verified": "N",
             "relevance": 12
         },
         {
             "id": "100386",
-            "label": "First-Name",
+            "label": "sample First-Name",
             "verified": "N",
             "relevance": 18
         },
         {
             "id": "100033",
-            "label": "City",
+            "label": "sample City",
             "verified": "N",
             "relevance": 2
         },
         {
             "id": "100387",
-            "label": "Gender",
+            "label": "sample Gender",
             "verified": "N",
             "relevance": 17
         },
         {
             "id": "100501",
-            "label": "person-id",
+            "label": "sample person-id",
             "verified": "N",
             "relevance": 17
         }
@@ -352,49 +352,49 @@
     "exampleColumns": [
         {
             "id": "200029",
-            "label": "ship_city",
+            "label": "sample ship_city",
             "verified": "Y",
             "relevance": 95
         },
         {
             "id": "200003",
-            "label": "product_code",
+            "label": "sample product_code",
             "verified": "Y",
             "relevance": 95
         },
         {
             "id": "200013",
-            "label": "last_name",
+            "label": "sample last_name",
             "verified": "N",
             "relevance": 1
         },
         {
             "id": "200053",
-            "label": "X9813_AVOCADO",
+            "label": "sample X9813_AVOCADO",
             "verified": "N",
             "relevance": 95
         },
         {
             "id": "200013",
-            "label": "last_name",
+            "label": "sample last_name",
             "verified": "Y",
             "relevance": 95
         },
         {
             "id": "e2c8f630-4a37-38d7-9359-1d1be8375fcd",
-            "label": "l_name",
+            "label": "sample l_name",
             "verified": "N",
             "relevance": 1
         },
         {
             "id": "28389982-3cdc-30d6-bc3f-cec02ae547ff",
-            "label": "last_name",
+            "label": "sample last_name",
             "verified": "N",
             "relevance": 1
         },
         {
             "id": "200033",
-            "label": "PRODUCT",
+            "label": "sample PRODUCT",
             "verified": "N",
             "relevance": 95
         },
@@ -406,13 +406,13 @@
         },
         {
             "id": "8eefd496-038d-3485-9b32-3eece55d3569",
-            "label": "last_name",
+            "label": "sample last_name",
             "verified": "N",
             "relevance": 1
         },
         {
             "id": "4ed34e05-5aa8-3e24-b17f-b57305156ad9",
-            "label": "cust_lname",
+            "label": "sample cust_lname",
             "verified": "N",
             "relevance": 1
         },
@@ -424,19 +424,19 @@
         },
         {
             "id": "200063",
-            "label": "SEC_CITY",
+            "label": "sample SEC_CITY",
             "verified": "N",
             "relevance": 95
         },
         {
             "id": "4ed34e05-5aa8-3e24-b17f-b57305156ad9",
-            "label": "cust_lname",
+            "label": "sample cust_lname",
             "verified": "N",
             "relevance": 1
         },
         {
             "id": "200021",
-            "label": "first_nm",
+            "label": "sample first_nm",
             "verified": "N",
             "relevance": 95
         }
