@@ -9,7 +9,7 @@
 A data component to curate concept
 
     <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
-    </<gid-curate-concept>
+    </gid-curate-concept>
     
 The properties 'concept' and 'user' are mandatory.
 
@@ -639,6 +639,8 @@ Output:
         },
         curateConceptResponseChanged : function(newvalue, oldvalue){
           this.response = [];
+		  this.apiEntity = '';
+          this.path = '';
 	          if(newvalue != null){
 		             this.async(function() {
 		         		this.response =  this.response.concat(newvalue);
