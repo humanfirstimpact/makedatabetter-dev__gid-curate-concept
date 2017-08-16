@@ -153,7 +153,7 @@
             "count": 13
         }
     ],
-    "relatedConcepts": [
+    "relatedDomains": [
         {
             "id": "100376",
             "label": "sample Email-Address",

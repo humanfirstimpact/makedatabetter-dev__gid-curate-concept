@@ -9,7 +9,7 @@
 A data component to curate concept
 
     <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
-    </gid-curate-concept>
+    </<gid-curate-concept>
     
 The properties 'concept' and 'user' are mandatory.
 
@@ -17,13 +17,13 @@ If 'apiUrl' is not provided, then the component would fetch sample data from moc
 
 API endpoint:
 
-    PUT /concepts/{id}/curate
+    PUT /domains/{id}/curation
 
 Input:
 
 - User Id (Query Param)
 
-- Concept Id (URL Param)
+- Domain Id (URL Param)
 
 - ~~List of recommended applications to start with~~
 
@@ -46,7 +46,7 @@ Sample Input: (as JSON payload)
 	            {"id":"100152","verified":"Y"},
 	            {"id":"100151","verified":"Y"},
 	        ],
-	        "relatedConcepts":[
+	        "relatedDomains":[
 	            {"id":"100052","verified":"Y"},
 	            {"id":"100051","verified":"Y"},
 	        ],
@@ -226,7 +226,7 @@ Output:
 	            "count": 13
 	        }
 	    ],
-	    "relatedConcepts": [
+	    "relatedDomains": [
 	        {
 	            "id": "100376",
 	            "label": "Email-Address",
