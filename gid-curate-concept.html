@@ -9,7 +9,7 @@
 A data component to curate concept
 
     <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
-    </<gid-curate-concept>
+    </gid-curate-concept>
     
 The properties 'concept' and 'user' are mandatory.
 
@@ -589,7 +589,7 @@ Output:
 	           	   notify: true,
 	           	   value: []
               },
-              relatedConcepts: {
+              relatedDomains: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
@@ -607,7 +607,7 @@ Output:
      	      reqBodyArr: {
 	           	   type: Array,
 	           	   notify: true,
-	           	   value: ["synonyms", "patterns", "relatedConcepts", "exampleValues", "exampleColumns"]
+	           	   value: ["synonyms", "patterns", "relatedDomains", "exampleValues", "exampleColumns"]
                },
                reqBodyObj: {
             	   type: Array,

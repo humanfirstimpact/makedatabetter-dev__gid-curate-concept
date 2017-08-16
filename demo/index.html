@@ -33,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <gid-curate-concept user='1' api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
         concept='100392' synonyms = '[{"id": "100052","verified": "Y"},	{"id": "100051","verified": "Y"}]'
         patterns= '[{"id": "100152","verified": "Y"},{"id": "100151","verified": "Y"}]' 
-        related-concepts = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
+        related-domains = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
         example-values = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
         example-columns = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
         curate = true
@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				     </template>
 				    </td>
 				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.relatedConcepts]]">
+				     <template is="dom-repeat" items="[[item.relatedDomains]]">
 				     	<p>{{item.label}}</p>
 				     </template>
 				    </td>
