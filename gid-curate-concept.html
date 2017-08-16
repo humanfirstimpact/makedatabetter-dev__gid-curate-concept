@@ -527,7 +527,7 @@ Output:
          <!-- fetch concept details -->	
 			<gid-api auto=false
 				method="PUT" api-url={{curateConceptUrl}} response='{{curateConceptResponse}}' request-body={{curateConceptReqBody}}
-				api-timeout={{curateConceptTimeout}} api-params={{curateConceptParams}}> </gid-api>			
+				api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}> </gid-api>			
 	    <!-- fetch concept details -->
 
   </template>
@@ -537,6 +537,11 @@ Output:
       Polymer({
         is:'gid-curate-concept',
         properties:{
+	        	apiToken: {
+	            	type: String,
+	                notify: true,
+	                value : ''
+	            },
 	        	apiUrl:{
 	            	type: String,
 	    	        notify: true,
@@ -564,77 +569,81 @@ Output:
 	     	   		type: Object,
 	     	   		notify : true
 	 	   	    },
+	 	   		curateConceptToken : {
+	     	   		type: String,
+	     	   		notify : true
+     	   	    },
      	   	    response: {
      	          type: Array,
      	          value: [],
      	          notify: true
      	        },
-     	       user: {
+     	       	user: {
      	        	type: String,
      	        	value : '',
      	        	notify :  true
      	        },
-     	       concept:{
+     	       	concept:{
      	    	  type: String,
 	   	          value : '',
 	   	          notify :  true
-     	       },
-     	      synonyms: {
+     	        },
+     	        synonyms: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              patterns: {
+                },
+                patterns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              relatedDomains: {
+                },
+                relatedDomains: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              exampleValues: {
+                },
+                exampleValues: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              exampleColumns: {
+                },
+                exampleColumns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-     	      reqBodyArr: {
+                },
+     	        reqBodyArr: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: ["synonyms", "patterns", "relatedDomains", "exampleValues", "exampleColumns"]
-               },
-               reqBodyObj: {
+                },
+                reqBodyObj: {
             	   type: Array,
 	           	   notify: true,
 	           	   value: {}
-               },
-     	       entity: {
+                },
+     	        entity: {
                    type: String,
                    notify: true,
                    value: ''
-               },
-               path: {
+                },
+                path: {
                	   type: String,
                    notify: true,
                    value: '',
                    observer: 'pathReceived'
-               },
-               apiEntity: {
+                },
+                apiEntity: {
                	   type: String,
                    notify: true
-               },
-               curate: {
+                },
+                curate: {
             	   type: Boolean,
             	   notify: true,
             	   value: false,
             	   observer: 'curateConcept'
-               }
+                }
                
         },
         curateConceptResponseChanged : function(newvalue, oldvalue){
@@ -676,6 +685,9 @@ Output:
                 		this.reqBodyObj[this.reqBodyArr[i]]= this[this.reqBodyArr[i]];
                 	}
                 }
+                if(this.apiToken){
+       				this.curateConceptToken =  this.apiToken;
+       			}
        			this.curateConceptReqBody = this.reqBodyObj;
        			this.curateConceptTimeout =  this.curateConceptTimeout - 1;
          		
