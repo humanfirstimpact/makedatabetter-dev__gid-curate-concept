@@ -526,7 +526,7 @@ Output:
         
          <!-- fetch concept details -->	
 			<gid-api auto=false
-				method="PUT" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded" response='{{curateConceptResponse}}' request-body={{curateConceptReqBody}}
+				method="POST" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded" response='{{curateConceptResponse}}' request-body={{curateConceptReqBody}}
 				api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}> </gid-api>			
 	    <!-- fetch concept details -->
 
@@ -687,7 +687,7 @@ Output:
                 		this.reqBodyObj[this.reqBodyArr[i]]= this[this.reqBodyArr[i]];
                 	}
                 }
-                this.curateConceptReqBody["definition"] = JSON.stringify(this.reqBodyObj);
+                this.curateConceptReqBody["curate"] = JSON.stringify(this.reqBodyObj);
                 if(this.apiToken){
        				this.curateConceptToken =  this.apiToken;
        			}
