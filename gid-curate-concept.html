@@ -521,13 +521,15 @@ Output:
 <dom-module id="gid-curate-concept">
   <template>
           <!-- fetch entity path  -->
-        	<gid-api entity = '{{apiEntity}}' path='{{path}}'></gid-api>
+        	<gid-api entity = '{{apiEntity}}' path-key= '{{pathKey}}' path='{{path}}'></gid-api>
         <!--  fetch entity path -->
         
          <!-- fetch concept details -->	
 			<gid-api auto=false
-				method="POST" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded" response='{{curateConceptResponse}}' request-body={{curateConceptReqBody}}
-				api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}> </gid-api>			
+			method="POST" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded"
+			response='{{curateConceptResponse}}' error='{{curateConceptError}}' request-body={{curateConceptReqBody}}
+			api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}>
+		    </gid-api>			
 	    <!-- fetch concept details -->
 
   </template>
@@ -559,7 +561,12 @@ Output:
         	    curateConceptResponse : {
 	     	  		type : Object,
 	     	  		notify : true,
-	     	  		observer : 'curateConceptResponseChanged'
+	     	  		observer : 'curateConceptResponseReceived'
+        	  	},
+        	  	curateConceptError : {
+	     	  		type : Object,
+	     	  		notify : true,
+	     	  		observer : 'curateConceptErrorReceived'
         	  	},
         	  	curateConceptParams : {
 	     	   		type: String,
@@ -647,17 +654,29 @@ Output:
                 }
                
         },
-        curateConceptResponseChanged : function(newvalue, oldvalue){
+        curateConceptResponseReceived : function(newvalue, oldvalue){
           this.response = [];
-		  this.apiEntity = '';
-          this.path = '';
-		  this.curate = false;
-	          if(newvalue != null){
-		             this.async(function() {
-		         		this.response =  this.response.concat(newvalue);
-		   		 	          }, 500);
-	          }
+          this.reset();
+          if(newvalue != null){
+	             this.async(function() {
+	         		this.response =  this.response.concat(newvalue);
+	   		 	          }, 500);
+          }
          	
+         },
+         curateConceptErrorReceived : function(newvalue, oldvalue){
+            this.response = [];
+            this.reset();
+            if(newvalue != null){
+	             this.async(function() {
+	         		this.response =  this.response.concat(newvalue);
+	   		 	          }, 500);
+          }
+         },
+         reset:  function(){
+        	 this.apiEntity = '';
+             this.path = '';
+   		  	 this.curate = false;
          },
          curateConcept: function () {
         	 if (this.curate) {
@@ -666,6 +685,7 @@ Output:
 	                //this.curateConceptTimeout =  this.curateConceptTimeout - 1;
       			}
         		else {
+        			this.pathKey =  'default';
          			this.apiEntity = 'CURATE-CONCEPT';
          		}
          	}
