@@ -8,10 +8,14 @@
 
 A data component to curate concept
 
-    <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
+    <gid-curate-concept concept='1' user='1' curate=true response={{response}}>
     </gid-curate-concept>
     
-The properties 'concept' and 'user' are mandatory.
+The properties 'concept', 'user' and 'curate' are mandatory.
+
+The field 'curate' needs to set to 'true' in order to curate a concept.
+
+The field 'response' returns the response provided by the rest call.
 
 If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
 
