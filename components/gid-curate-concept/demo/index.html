@@ -13,80 +13,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <title>gid curate concept</title>
 
-    <link rel="import" href="../gid-curate-concept.html">
-    <style>
-	  	table, th, td {
-	    border: 1px solid grey;
-	    border-collapse: collapse;
-		}
-		td {
-		    text-align: center;
-		}
-  	</style>
+    <link rel="import" href="curate-concept.html">
 </head>
 <body unresolved>
-<h1>Curate Concept</h1>
-
-<div class="horizontal-section-container">
-    <template is="dom-bind" id="app">
-    
-        <gid-curate-concept user='1' api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
-        concept='100392' synonyms = '[{"id": "100052","verified": "Y"},	{"id": "100051","verified": "Y"}]'
-        patterns= '[{"id": "100152","verified": "Y"},{"id": "100151","verified": "Y"}]' 
-        related-concepts = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
-        example-values = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
-        example-columns = '[{"id": "100052","verified": "Y"},{"id": "100051","verified": "Y"}]'
-        curate = true
-        response='{{response}}'>
-        </gid-curate-concept>
-        
-        <template is="dom-repeat" items="[[response]]">
-            <div class="horizontal-section">
-                <table style="width:100%">
-				  <tr>
-				    <th>Synonyms</th>
-				    <th>Patterns</th>
-				    <th>Related Concepts</th>
-				    <th>Example Values</th>
-				    <th>Example Columns</th>
-				  </tr>
-				  <tr>
-				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.synonyms]]">
-				     	<p>{{item.label}}</p>
-				     </template>
-				    </td>
-				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.patterns]]">
-				     	<p>{{item.label}}</p>
-				     </template>
-				    </td>
-				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.relatedConcepts]]">
-				     	<p>{{item.label}}</p>
-				     </template>
-				    </td>
-				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.exampleValues]]">
-				     	<p>{{item.label}}</p>
-				     </template>
-				    </td>
-				    <td valign="top">
-				     <template is="dom-repeat" items="[[item.exampleColumns]]">
-				     	<p>{{item.label}}</p>
-				     </template>
-				    </td>
-				  </tr>
-				</table>
-            </div>
-        </template>
-    </template>
-</div>
-
+    <curate-concept><curate-concept>
 <script>
-    var app = document.querySelector('#app');
-
-
 </script>
 </body>
 </html>

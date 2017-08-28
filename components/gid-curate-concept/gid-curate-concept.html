@@ -8,10 +8,14 @@
 
 A data component to curate concept
 
-    <gid-curate-concept concept='1' user='1' curateconcept='{{curateconcept}}'>
-    </<gid-curate-concept>
+    <gid-curate-concept concept='1' user='1' curate=true response={{response}}>
+    </gid-curate-concept>
     
-The properties 'concept' and 'user' are mandatory.
+The properties 'concept', 'user' and 'curate' are mandatory.
+
+The field 'curate' needs to set to 'true' in order to curate a concept.
+
+The field 'response' returns the response provided by the rest call.
 
 If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
 
@@ -521,13 +525,15 @@ Output:
 <dom-module id="gid-curate-concept">
   <template>
           <!-- fetch entity path  -->
-        	<gid-api entity = '{{apiEntity}}' path='{{path}}'></gid-api>
+        	<gid-api entity = '{{apiEntity}}' path-key= '{{pathKey}}' path='{{path}}'></gid-api>
         <!--  fetch entity path -->
         
          <!-- fetch concept details -->	
 			<gid-api auto=false
-				method="PUT" api-url={{curateConceptUrl}} response='{{curateConceptResponse}}' request-body={{curateConceptReqBody}}
-				api-timeout={{curateConceptTimeout}} api-params={{curateConceptParams}}> </gid-api>			
+			method="POST" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded"
+			response='{{curateConceptResponse}}' error='{{curateConceptError}}' request-body={{curateConceptReqBody}}
+			api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}>
+		    </gid-api>			
 	    <!-- fetch concept details -->
 
   </template>
@@ -537,6 +543,11 @@ Output:
       Polymer({
         is:'gid-curate-concept',
         properties:{
+	        	apiToken: {
+	            	type: String,
+	                notify: true,
+	                value : ''
+	            },
 	        	apiUrl:{
 	            	type: String,
 	    	        notify: true,
@@ -554,7 +565,12 @@ Output:
         	    curateConceptResponse : {
 	     	  		type : Object,
 	     	  		notify : true,
-	     	  		observer : 'curateConceptResponseChanged'
+	     	  		observer : 'curateConceptResponseReceived'
+        	  	},
+        	  	curateConceptError : {
+	     	  		type : Object,
+	     	  		notify : true,
+	     	  		observer : 'curateConceptErrorReceived'
         	  	},
         	  	curateConceptParams : {
 	     	   		type: String,
@@ -562,89 +578,109 @@ Output:
      	   	    },
 	     	   	curateConceptReqBody : {
 	     	   		type: Object,
-	     	   		notify : true
+	     	   		notify : true,
+	     	   		value: {}
 	 	   	    },
+	 	   		curateConceptToken : {
+	     	   		type: String,
+	     	   		notify : true
+     	   	    },
      	   	    response: {
      	          type: Array,
      	          value: [],
      	          notify: true
      	        },
-     	       user: {
+     	       	user: {
      	        	type: String,
      	        	value : '',
      	        	notify :  true
      	        },
-     	       concept:{
+     	       	concept:{
      	    	  type: String,
 	   	          value : '',
 	   	          notify :  true
-     	       },
-     	      synonyms: {
+     	        },
+     	        synonyms: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              patterns: {
+                },
+                patterns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              relatedConcepts: {
+                },
+                relatedDomains: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              exampleValues: {
+                },
+                exampleValues: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-              exampleColumns: {
+                },
+                exampleColumns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
-              },
-     	      reqBodyArr: {
+                },
+     	        reqBodyArr: {
 	           	   type: Array,
 	           	   notify: true,
-	           	   value: ["synonyms", "patterns", "relatedConcepts", "exampleValues", "exampleColumns"]
-               },
-               reqBodyObj: {
+	           	   value: ["synonyms", "patterns", "relatedDomains", "exampleValues", "exampleColumns"]
+                },
+                reqBodyObj: {
             	   type: Array,
 	           	   notify: true,
 	           	   value: {}
-               },
-     	       entity: {
+                },
+     	        entity: {
                    type: String,
                    notify: true,
                    value: ''
-               },
-               path: {
+                },
+                path: {
                	   type: String,
                    notify: true,
                    value: '',
                    observer: 'pathReceived'
-               },
-               apiEntity: {
+                },
+                apiEntity: {
                	   type: String,
                    notify: true
-               },
-               curate: {
+                },
+                curate: {
             	   type: Boolean,
             	   notify: true,
             	   value: false,
             	   observer: 'curateConcept'
-               }
+                }
                
         },
-        curateConceptResponseChanged : function(newvalue, oldvalue){
+        curateConceptResponseReceived : function(newvalue, oldvalue){
           this.response = [];
-	          if(newvalue != null){
-		             this.async(function() {
-		         		this.response =  this.response.concat(newvalue);
-		   		 	          }, 500);
-	          }
+          this.reset();
+          if(newvalue != null){
+	             this.async(function() {
+	         		this.response =  this.response.concat(newvalue);
+	   		 	          }, 500);
+          }
          	
+         },
+         curateConceptErrorReceived : function(newvalue, oldvalue){
+            this.response = [];
+            this.reset();
+            if(newvalue != null){
+	             this.async(function() {
+	         		this.response =  this.response.concat(newvalue);
+	   		 	          }, 500);
+          }
+         },
+         reset:  function(){
+        	 this.apiEntity = '';
+             this.path = '';
+   		  	 this.curate = false;
          },
          curateConcept: function () {
         	 if (this.curate) {
@@ -653,6 +689,7 @@ Output:
 	                //this.curateConceptTimeout =  this.curateConceptTimeout - 1;
       			}
         		else {
+        			this.pathKey =  'default';
          			this.apiEntity = 'CURATE-CONCEPT';
          		}
          	}
@@ -674,7 +711,10 @@ Output:
                 		this.reqBodyObj[this.reqBodyArr[i]]= this[this.reqBodyArr[i]];
                 	}
                 }
-       			this.curateConceptReqBody = this.reqBodyObj;
+                this.curateConceptReqBody["curate"] = JSON.stringify(this.reqBodyObj);
+                if(this.apiToken){
+       				this.curateConceptToken =  this.apiToken;
+       			}
        			this.curateConceptTimeout =  this.curateConceptTimeout - 1;
          		
          	}
