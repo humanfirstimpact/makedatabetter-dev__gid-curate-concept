@@ -524,15 +524,15 @@ Output:
 -->
 <dom-module id="gid-curate-concept">
   <template>
-          <!-- fetch entity path  -->
-        	<gid-api entity = '{{apiEntity}}' path-key= '{{pathKey}}' path='{{path}}'></gid-api>
+          <!-- fetch entity _path  -->
+        	<gid-api entity = '{{_apiEntity}}' path-key= '{{pathKey}}' path='{{_path}}'></gid-api>
         <!--  fetch entity path -->
         
          <!-- fetch concept details -->	
 			<gid-api auto=false
-			method="POST" api-url={{curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded"
-			response='{{curateConceptResponse}}' error='{{curateConceptError}}' request-body={{curateConceptReqBody}}
-			api-params={{curateConceptParams}} api-token = {{curateConceptToken}} api-timeout={{curateConceptTimeout}}>
+			method="POST" api-url={{_curateConceptUrl}} api-content-type = "application/x-www-form-urlencoded"
+			response='{{curateConceptResponse}}' error='{{curateConceptError}}' request-body={{_curateConceptReqBody}}
+			api-params={{_curateConceptParams}} api-token = {{_curateConceptToken}} api-timeout={{_curateConceptTimeout}}>
 		    </gid-api>			
 	    <!-- fetch concept details -->
 
@@ -543,124 +543,147 @@ Output:
       Polymer({
         is:'gid-curate-concept',
         properties:{
+        		/*Authorization token for accessing rest api*/
 	        	apiToken: {
 	            	type: String,
 	                notify: true,
 	                value : ''
 	            },
+	            /*Base url*/
 	        	apiUrl:{
 	            	type: String,
 	    	        notify: true,
 	    	        value: ''
 	    	 	},
-        	   curateConceptUrl:{
-                	type: String,
+	    	 	/*Url sent to gid-api*/
+        	    _curateConceptUrl:{
+                 	type: String,
         	        notify: true
         	 	},
-        	 	curateConceptTimeout : {
+        	 	/*Timeout sent to gid-api*/
+        	 	_curateConceptTimeout : {
             		type: Number,
         	        notify: true,
         	        value : 0
         	    },
+        	    /*Response sent to gid-api. This is a private property*/
         	    curateConceptResponse : {
 	     	  		type : Object,
 	     	  		notify : true,
-	     	  		observer : 'curateConceptResponseReceived'
+	     	  		observer : '_curateConceptResponseReceived'
         	  	},
+        	  	/*Error sent to gid-api. This is a private property*/
         	  	curateConceptError : {
 	     	  		type : Object,
 	     	  		notify : true,
-	     	  		observer : 'curateConceptErrorReceived'
+	     	  		observer : '_curateConceptErrorReceived'
         	  	},
-        	  	curateConceptParams : {
+        	  	/*Params sent to gid-api*/
+        	  	_curateConceptParams : {
 	     	   		type: String,
 	     	   		notify : true
      	   	    },
-	     	   	curateConceptReqBody : {
+     	   	    /*Request body sent to gid-api*/
+	     	   	_curateConceptReqBody : {
 	     	   		type: Object,
 	     	   		notify : true,
 	     	   		value: {}
 	 	   	    },
-	 	   		curateConceptToken : {
+	 	   	    /*Token sent to gid-api*/
+	 	   		_curateConceptToken : {
 	     	   		type: String,
 	     	   		notify : true
      	   	    },
+     	   		/*Object for storing success/error response*/
      	   	    response: {
      	          type: Array,
      	          value: [],
      	          notify: true
      	        },
+     	        /*User Id*/
      	       	user: {
      	        	type: String,
      	        	value : '',
      	        	notify :  true
      	        },
+     	        /*Concept Id*/
      	       	concept:{
      	    	  type: String,
 	   	          value : '',
 	   	          notify :  true
      	        },
+     	        /*Array of Synonym Ids*/
      	        synonyms: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
                 },
+                /*Array of Pattern Ids*/
                 patterns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
                 },
+                /*Array of Related Domain Ids*/
                 relatedDomains: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
                 },
+                /*Array of Example Values Ids*/
                 exampleValues: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
                 },
+                /*Array of Example Columns Ids*/
                 exampleColumns: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: []
                 },
-     	        reqBodyArr: {
+                /*Array of request body properties*/ 
+     	        _reqBodyArr: {
 	           	   type: Array,
 	           	   notify: true,
 	           	   value: ["synonyms", "patterns", "relatedDomains", "exampleValues", "exampleColumns"]
                 },
-                reqBodyObj: {
+                /*Request body object*/
+                _reqBodyObj: {
             	   type: Array,
 	           	   notify: true,
 	           	   value: {}
                 },
-     	        entity: {
-                   type: String,
-                   notify: true,
-                   value: ''
+                /*The api path key*/
+ 	           _pathKey: {
+ 	            	type: String,
+ 	                notify: true,
+ 	                value: ''
+ 	           },
+ 	           /*The api path*/
+                _path: {
+                	   type: String,
+                    notify: true,
+                    value: '',
+                    observer: '_pathReceived'
                 },
-                path: {
-               	   type: String,
-                   notify: true,
-                   value: '',
-                   observer: 'pathReceived'
+                /*Api entity sent to gid-api*/
+                _apiEntity: {
+                	   type: String,
+                    notify: true
                 },
-                apiEntity: {
-               	   type: String,
-                   notify: true
-                },
+                /*Flag set to 'true' to curate concept*/
                 curate: {
             	   type: Boolean,
             	   notify: true,
             	   value: false,
-            	   observer: 'curateConcept'
+            	   observer: '_curateConcept'
                 }
                
         },
-        curateConceptResponseReceived : function(newvalue, oldvalue){
-          this.response = [];
-          this.reset();
+        /* Success response handler */
+        _curateConceptResponseReceived : function(newvalue, oldvalue){
+          this._reset();
           if(newvalue != null){
 	             this.async(function() {
 	         		this.response =  this.response.concat(newvalue);
@@ -668,36 +691,40 @@ Output:
           }
          	
          },
-         curateConceptErrorReceived : function(newvalue, oldvalue){
-            this.response = [];
-            this.reset();
+         /* Error response handler */
+         _curateConceptErrorReceived : function(newvalue, oldvalue){
+            this._reset();
             if(newvalue != null){
 	             this.async(function() {
 	         		this.response =  this.response.concat(newvalue);
 	   		 	          }, 500);
           }
          },
-         reset:  function(){
-        	 this.apiEntity = '';
-             this.path = '';
+         /* Reset method */
+         _reset:  function(){
+        	 this.response = [];
+        	 this._apiEntity = '';
+             this._path = '';
    		  	 this.curate = false;
          },
-         curateConcept: function () {
+         /* Observer of 'curate' flag */
+         _curateConcept: function () {
         	 if (this.curate) {
         	 	if (!this.apiUrl) {
-	      			//this.curateConceptUrl = this.importPath + 'assets/json/curate-concept.json';
-	                //this.curateConceptTimeout =  this.curateConceptTimeout - 1;
+	      			//this._curateConceptUrl = this.importPath + 'assets/json/curate-concept.json';
+	                //this._curateConceptTimeout =  this._curateConceptTimeout - 1;
       			}
         		else {
         			this.pathKey =  'default';
-         			this.apiEntity = 'CURATE-CONCEPT';
+         			this._apiEntity = 'CURATE-CONCEPT';
          		}
          	}
 				
          },
-         pathReceived: function(){
-         	if(this.path){
-         		var res = this.path.split(/{([^}]+)}/);
+         /* Observer for api path */
+         _pathReceived: function(){
+         	if(this._path){
+         		var res = this._path.split(/{([^}]+)}/);
          		for (var i in res) {
          			if(!res[i].startsWith("/")){
          					if(this[res[i]]){
@@ -705,17 +732,17 @@ Output:
          					}
          			}
          		}
-       			this.curateConceptUrl = this.apiUrl + res.join("");
-                for (var i in this.reqBodyArr){
-                	if(this[this.reqBodyArr[i]].length){
-                		this.reqBodyObj[this.reqBodyArr[i]]= this[this.reqBodyArr[i]];
+       			this._curateConceptUrl = this.apiUrl + res.join("");
+                for (var i in this._reqBodyArr){
+                	if(this[this._reqBodyArr[i]].length){
+                		this._reqBodyObj[this._reqBodyArr[i]]= this[this._reqBodyArr[i]];
                 	}
                 }
-                this.curateConceptReqBody["curate"] = JSON.stringify(this.reqBodyObj);
+                this._curateConceptReqBody["curate"] = JSON.stringify(this._reqBodyObj);
                 if(this.apiToken){
-       				this.curateConceptToken =  this.apiToken;
+       				this._curateConceptToken =  this.apiToken;
        			}
-       			this.curateConceptTimeout =  this.curateConceptTimeout - 1;
+       			this._curateConceptTimeout =  this._curateConceptTimeout - 1;
          		
          	}
          }
