@@ -13,8 +13,8 @@
   		</style>
   		<h1>Curate Concept</h1>
         <gid-curate-concept user='1' api-url='https://srv-34-197-77-167.globalids.com:8443/api/v1'
-        concept='4920055981064928686' synonyms = '[{"id": "6wquedjjash","verified": "Y"}]'
-        api-token = 'MTAxNjUwMzAxMTUwMzU1NjY3ODU3MDA5MDFY'
+        concept='-2444725866463153453' synonyms = '[{"id": "-4882268586167748962","verified": "Y"}]'
+        api-token = 'MTAxNjUwMzAxMTUwNDUwNTg3NDkwODA5MDFY'
         curate = true
         response='{{response}}'>
         </gid-curate-concept>
@@ -83,13 +83,15 @@
      	        }
         },
          responseReceived: function () {
-        	 if(this.response){	
-				if(this.response.errorCode){
-					this.isConceptCurated = false;
-				}
-				else{
-					this.isConceptCurated =  true;
-				}
+        	 if(this.response){
+        		 if(this.response.length > 0){	
+     				if(this.response.errorCode){
+     					this.isConceptCurated = false;
+     				}
+     				else{
+     					this.isConceptCurated =  true;
+     				}
+             	 }
         	 }
          }
       });
