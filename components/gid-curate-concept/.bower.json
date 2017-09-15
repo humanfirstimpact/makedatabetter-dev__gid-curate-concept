@@ -21,11 +21,11 @@
     "lodash": "4.17.4"
   },
   "homepage": "https://github.com/makedatabetter-dev/gid-curate-concept",
-  "_release": "44c681ecd8",
+  "_release": "d2730a0326",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "44c681ecd8cfdefa5b377dae0aab4b3f0fa4e03d"
+    "commit": "d2730a0326b0bebd99bb7b986b5e6bcc66e7722c"
   },
   "_source": "https://github.com/makedatabetter-dev/gid-curate-concept.git",
   "_target": "*",
