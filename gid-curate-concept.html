@@ -1,4 +1,4 @@
-<!--
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <!--
   Wrapper component for concepts
 -->
 <link rel="import" href="../polymer/polymer.html">
@@ -8,16 +8,28 @@
 
 A data component to curate concept
 
-    <gid-curate-concept concept='1' user='1' curate=true response={{response}}>
+    <gid-curate-concept api-url="<your-api-url>" api-token="<your-api-token>" 
+    user="<your-user-id>" concept="<concept-id>" curate=true response={{response}}>
     </gid-curate-concept>
     
-The properties 'concept', 'user' and 'curate' are mandatory.
+To curate a concept, the user needs to follow the steps mentioned below:
+
+ - The concept id to be curated is specified in the 'concept' field
+ - The user id needs to be provided in 'user' parameter.
+ - The 'api-url' needs to be provided to specify the rest end point.
+ - The 'api-token' would contain the access token to access the mentioned rest end point.
+ - The properties 'synonyms', 'patterns', 'relatedDomains', 'exampleValues' and 'exampleColumns' are the parameters that can be 
+ curated against the mentioned concept id.
+ - To curate the concept, user needs to set the 'curate' flag to 'true' in order to trigger the rest call.
+ - The 'response' property would return the response whether the concept has been curated successfully or not.    
+
+The properties 'concept', 'user', 'curate' and 'response' are mandatory.
 
 The field 'curate' needs to set to 'true' in order to curate a concept.
 
 The field 'response' returns the response provided by the rest call.
 
-If 'apiUrl' is not provided, then the component would fetch sample data from mock json.
+If 'api-url' is not provided, then the component would fetch sample data from mock json.
 
 API endpoint:
 
@@ -25,9 +37,11 @@ API endpoint:
 
 Input:
 
-- User Id (Query Param)
+- User Id* (Query Param)
 
-- Domain Id (URL Param)
+- Domain Id* (URL Param)
+
+Note: The inputs marked with '*' are mandatory inputs.
 
 - ~~List of recommended applications to start with~~
 
@@ -65,17 +79,17 @@ Sample Input: (as JSON payload)
 	    }
 	
 Output:
-	- ~~5 synonyms (with likelihood)~~
-	- ~~5 patterns (with likelihood)~~
-	- ~~5 related concepts (with likelihood)~~
+	- 5 synonyms (with likelihood)
+	- 5 patterns (with likelihood)
+	- 5 related concepts (with likelihood)
 	
 	- list of 10 example columns and 100 example values (prioritised by relevance)
 	
 	- output 2 + revised list of synonyms, patterns and related concepts 
 		
-	- ~~search results~~
+	- search results
 		
-		{
+	{
 	    "synonyms": [
 	        {
 	            "id": "700129",
